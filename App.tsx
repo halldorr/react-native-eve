@@ -1,24 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
-  const [name, setName] = useState<string>('Press button to get names');
+  const [characterName, setCharacterName] = useState<string>('');
+
   return (
     <View style={styles.mainContainer}>
-      <StatusBar style="auto" />
-      <View style={styles.container}>
-        <View style={styles.button}>        
-          <Button title="Student 1" onPress={() => setName('Jeff')} ></Button>
-        </View>
-        <View style={styles.button}>        
-          <Button title="Student 2" onPress={() => setName('Kshira')} ></Button>
-        </View>
-        <View style={styles.button}>        
-          <Button title="Student 3" onPress={() => setName('JW')} ></Button>
-        </View>
-      </View>
-      <View><ExampleComponent title={name} /></View>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter your character name"
+        onChangeText={(text) => setCharacterName(text)}
+      />
+      <Button title="Search" onPress={() => setCharacterName('Jeff!')} ></Button>
+      <View><ExampleComponent title={characterName} /></View>
     </View>
   );
 }
@@ -42,12 +37,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  container: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
   header: {
     fontSize: 30,
     fontWeight: 'bold',
@@ -55,5 +44,11 @@ const styles = StyleSheet.create({
   button: {
     marginBottom: 20,
     padding: 10
+},
+input: {
+  height: 40,
+  margin: 12,
+  borderWidth: 1,
+  padding: 10,
 },
 });
